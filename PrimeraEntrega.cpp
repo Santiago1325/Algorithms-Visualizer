@@ -39,20 +39,23 @@ void printBars(vector<int> &a){
     }
 }
 
+void printSorting(vector<int> &a){
+    printBars(a);
+    printVector(a);
+    cout << endl;
+}
+
 void BubbleSort(vector<int> &v){
     int comparisons = 0;
     int swaps = 0;
+    printSorting(v);
     for(int i = 0; i < v.size(); i++){
         for(int j = 0; j < v.size()-1-i; j++){
+            comparisons++;
             if(v[j] > v[j+1]){
                 itemSwap(v, j, j+1);
                 swaps++;
-                comparisons++;
-                printBars(v);
-                printVector(v);
-                cout << "\n";
-            }else{
-                comparisons++;
+                printSorting(v);
             }
         }
     }
@@ -64,23 +67,20 @@ void SelectionSort(vector<int> &v){
     int comparisons = 0;
     int swaps = 0;
     int minIndex;
+    printSorting(v);
     for(int i = 0; i < v.size(); i++){
         minIndex = i;
         for(int j = i+1; j < v.size(); j++){
+            comparisons++;
             if(v[j] < v[minIndex]){
-                comparisons++;
                 minIndex = j;
-            }else{
-                comparisons++;
             }
         }
+        comparisons++;
         if(v[i] > v[minIndex]){
             itemSwap(v, i, minIndex);
             swaps++;
-            comparisons++;
-            printBars(v);
-            printVector(v);
-            cout << endl;
+            printSorting(v);
         }
     }
     cout << "Comparisons: " << comparisons << endl;
@@ -91,23 +91,23 @@ void InsertionSort(vector<int> &v){
     int comparisons = 0;
     int swaps = 0;
     int auxIndex;
-    for(int i = 1; i < v.size()-1; i++){
-        if(v[i] > v[i+1]){
-            comparisons++;
-            auxIndex = i;
-            itemSwap(v, i, i+1);
+    printSorting(v);
+    for(int i = 1; i < v.size(); i++){
+        comparisons++;
+        if(v[i] < v[i-1]){
+            auxIndex = i-1;
+            itemSwap(v, i, i-1);
             swaps++;
-            printBars(v);
-            printVector(v);
+            printSorting(v);
+            comparisons++;
             while(v[auxIndex] < v[auxIndex-1]){
-                comparisons++;
                 itemSwap(v, auxIndex, auxIndex-1);
                 swaps++;
-                printBars(v);
-                printVector(v);
-                cout << endl;
+                printSorting(v);
                 auxIndex--;
             }
+        }else{
+            comparisons++;
         }
     }
     cout << "Comparisons: " << comparisons << endl;
@@ -117,10 +117,48 @@ void InsertionSort(vector<int> &v){
 
 
 int main() {
-    vector<int> a = {4,6,2,1,9,5,7,3,8};
-    printBars(a);
+    vector<int> a = {9,8,7,6,5,4,3,2,1};
+    vector<int> b = {1,2,3,4,5,6,7,8,9};
+    vector<int> c = {5,7,2,4,6,1,9,8,3};
+    
+    char k;
+    char l;
+    cout << "Choose the sorting algorithm:\n1) Bubble Sort\n2) Selection Sort\n3) Insertion Sort\n";
+    cin >> k;
+    cout << "Choose the vector: \n";
+    cout << "1) A: ";
     printVector(a);
-    cout << "\n";
-    InsertionSort(a);
+    cout << "2) B: ";
+    printVector(b);
+    cout << "3) C: ";
+    printVector(c);
+    cin >> l;
+    
+    if(k == '1'){
+        if(l == '1'){
+            BubbleSort(a);
+        }else if(l == '2'){
+            BubbleSort(b);
+        }else if(l == '3'){
+            BubbleSort(c);
+        }
+    }else if(k == '2'){
+        if(l == '1'){
+            SelectionSort(a);
+        }else if(l == '2'){
+            SelectionSort(b);
+        }else if(l == '3'){
+            SelectionSort(c);
+        }
+    }else if(k == '3'){
+        if(l == '1'){
+            InsertionSort(a);
+        }else if(l == '2'){
+            InsertionSort(b);
+        }else if(l == '3'){
+            InsertionSort(c);
+        }
+    }
+
     return 0;
 }
