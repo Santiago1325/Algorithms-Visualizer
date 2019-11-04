@@ -42,8 +42,7 @@ def mainRelleno():
 
 """Main"""
 def main():
-    ruta = '/home/julian/Documentos/Graphical-Sort/textPrueba.txt'
-    miArch = open(ruta, 'r')
+    miArch = open('Sorting.txt', 'r')
     vec = miArch.readline()
     misRects = rects(vec)
     miArch.close()
