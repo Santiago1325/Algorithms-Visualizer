@@ -22,25 +22,28 @@ void BubbleSort(vector<int> &v){
     int comparisons = 0;
     int swaps = 0;
     ofstream outfile;
+    ofstream outfileIndx;
     outfile.open("Sorting.txt");
+    outfileIndx.open("Index.txt");
     for(int i = 0; i < v.size(); i++){
         for(int j = 0; j < v.size()-1-i; j++){
             comparisons++;
             outfile << printSorting(v) << endl; //Writes the vector on the file
-            outfile << j << endl; //Writes the index that is beoing looked at
-            outfile << comparisons << endl; //Wirtes the number of comparisons done
-            outfile << swaps << endl; //Writes the number of swaps done
+            outfileIndx << j+1 << endl; //Writes the index that is beoing looked at
+//            outfile << comparisons << endl; //Wirtes the number of comparisons done
+//            outfile << swaps << endl; //Writes the number of swaps done
             if(v[j] > v[j+1]){
                 itemSwap(v, j, j+1);
                 swaps++;
                 outfile << printSorting(v) << endl;
-                outfile << j << endl;
-                outfile << comparisons << endl;
-                outfile << swaps << endl;
+                outfileIndx << j+1 << endl;
+//                outfile << comparisons << endl;
+//                outfile << swaps << endl;
             }
         }
     }
     outfile.close();
+    outfileIndx.close();
 }
 
 void SelectionSort(vector<int> &v){
@@ -54,9 +57,9 @@ void SelectionSort(vector<int> &v){
         for(int j = i+1; j < v.size(); j++){
             comparisons++;
             outfile << printSorting(v) << endl;
-            outfile << i << endl;
-            outfile << comparisons << endl;
-            outfile << swaps << endl;
+//            outfile << i << endl;
+//            outfile << comparisons << endl;
+//            outfile << swaps << endl;
             if(v[j] < v[minIndex]){
                 minIndex = j;
             }
@@ -66,9 +69,9 @@ void SelectionSort(vector<int> &v){
             itemSwap(v, i, minIndex);
             swaps++;
             outfile << printSorting(v) << endl;
-            outfile << i << endl;
-            outfile << comparisons << endl;
-            outfile << swaps << endl;
+//            outfile << i << endl;
+//            outfile << comparisons << endl;
+//            outfile << swaps << endl;
         }
     }
 }
@@ -78,29 +81,31 @@ void InsertionSort(vector<int> &v){
     int swaps = 0;
     int auxIndex;
     ofstream outfile;
+    ofstream outfileIndx;
     outfile.open("Sorting.txt");
+    outfileIndx.open("Index.txt");
     for(int i = 1; i < v.size(); i++){
         outfile << printSorting(v) << endl;
-        outfile << i << endl;
-        outfile << comparisons << endl;
-        outfile << swaps << endl;
+//        outfile << i << endl;
+//        outfile << comparisons << endl;
+//        outfile << swaps << endl;
         if(v[i] < v[i-1]){
             auxIndex = i-1;
             itemSwap(v, i, i-1);
             swaps++;
             comparisons++;
             outfile << printSorting(v) << endl;
-            outfile << i << endl;
-            outfile << comparisons << endl;
-            outfile << swaps << endl;
+      //      outfile << i << endl;
+    //        outfile << comparisons << endl;
+  //          outfile << swaps << endl;
             while(v[auxIndex] < v[auxIndex-1]){
                 itemSwap(v, auxIndex, auxIndex-1);
                 swaps++;
                 comparisons++;
                 outfile << printSorting(v) << endl;
-                outfile << i << endl;
-                outfile << comparisons << endl;
-                outfile << swaps << endl;
+//                outfile << i << endl;
+//                outfile << comparisons << endl;
+//                outfile << swaps << endl;
                 auxIndex--;
             }
         }else{

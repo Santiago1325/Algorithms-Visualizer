@@ -1,65 +1,63 @@
 import pygame
+import time
 
-ANCHORECT = 20
-EJEY = 240
+WIDTH = 1800
+HEIGHT = 1000
+ANCHORECT = 10
+EJEY = 1000
 
 def rects(line):    #recibe una linea de un .txt
     listRects = []
-    x = 1
-    y = 50
+    p = 0
+    l = HEIGHT
     ejy = EJEY
     nums = line.split()
 
     for i in nums:
         ejy = EJEY-(int(i)*10)
-        rect = (y, ejy, ANCHORECT, (int(i)*10))
+        rect = ((p+WIDTH/4), ejy, ANCHORECT, (int(i)*10))
         listRects.append(rect)
-        x += 1
-        y += ANCHORECT + 10
+        l += 1
+        p += ANCHORECT + 10
 
     print(nums)
     return listRects
 
 
-def mainRelleno():
-    pygame.init()
-
-    surf_sz = 480
-    main_surf = pygame.display.set_mode((surf_sz, surf_sz))
-    small_rect = (300, 200, 150, 90)
-    some_color = (255,0,0)
-
-    while True:
-        ev = pygame.event.poll()
-        if ev.type == pygame.QUIT:
-            break
-
-        main_surf.fill((0, 200, 250))
-        main_surf.fill(some_color, small_rect)
-        pygame.display.flip()
-
-    pygame.quit()
-
 """Main"""
 def main():
     miArch = open('Sorting.txt', 'r')
+    Indexes = open('Index.txt', 'r')
     vec = miArch.readline()
     misRects = rects(vec)
-    miArch.close()
+    #miArch.close()
 
     pygame.init()
-    surf_sz = 480
-    main_surf = pygame.display.set_mode((surf_sz, surf_sz))
-    some_color = (255,0,0)
+    surf_sz = 1000
+    main_surf = pygame.display.set_mode((surf_sz*2-100, surf_sz))
+    BLACK = (0,0,0)
+    GREEN = (0,255,0)
 
     while True:
+        vec = miArch.readline()
+        idx = Indexes.readline()
+        count = 0
+        misRects = rects(vec)
+        if len(misRects) == 0:
+            break
+        time.sleep(0.0001)
         ev = pygame.event.poll()
         if ev.type == pygame.QUIT:
             break
 
-        main_surf.fill((0, 200, 250))
+        main_surf.fill((255, 255, 255))
         for i in misRects:
-            main_surf.fill(some_color, i)
+            if count == int(idx):
+                main_surf.fill(GREEN, i)
+                count += 1
+            else:
+                main_surf.fill(BLACK, i)
+                count += 1
 
         pygame.display.flip()
 
