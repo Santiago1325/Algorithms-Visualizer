@@ -3,8 +3,6 @@
 
 #include "helper_functions.hpp"
 
-
-string printSorting(vector<int> & v);
 void BubbleSort(vector<int> & v);
 void InsertionSort(vector<int> & v);
 void SelectionSort(vector<int> & v);
