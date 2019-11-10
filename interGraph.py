@@ -13,22 +13,24 @@ ORANGE = (255,127,80)
 WIDTH = 1000
 HEIGHT = 500
 WIDTHRECT = WIDTH//numElements()
+pygame.font.init()
+FONT = pygame.font.Font(None, 40)
 
 
 
 def rects(line):    #recibe una linea de un .txt
     listRects = []
-    PosX = 0
+    PosX = WIDTH-WIDTHRECT
     PosY = HEIGHT
     nums = line.split()
     max = numElements()
     
 
-    for i in nums:
+    for i in reversed(nums):
         HEIGHTRECT = int(i)*(HEIGHT//max)
         rect = (PosX, PosY-HEIGHTRECT, WIDTHRECT, HEIGHTRECT)
         listRects.append(rect)
-        PosX += WIDTHRECT
+        PosX -= WIDTHRECT
 
 
     return listRects
@@ -37,40 +39,43 @@ def rects(line):    #recibe una linea de un .txt
 """Main"""
 def main():
 
-    miArch = open('Sorting.txt', 'r')
+    Sorting = open('Sorting.txt', 'r')
     Indexes = open('Index.txt', 'r')
-    AuxIndexes = open('AuxIndex.txt','r')
-    vec = miArch.readline()
+    Comparisons = open('Comparisons.txt','r')
+    Swaps = open('Swaps.txt')
+    vec = Sorting.readline()
     misRects = rects(vec)
-    #auxCount = numElements()
 
     pygame.init()
     main_surf = pygame.display.set_mode((WIDTH, HEIGHT))
 
     while True:
-        vec = miArch.readline()
+        vec = Sorting.readline()
         idx = Indexes.readline()
-        #idxAux = AuxIndexes.readline()
-        count = 0
+        count = numElements()-1
         misRects = rects(vec)
+        Comp = FONT.render("Comparisons: "+str(int(Comparisons.readline())+1),True,ORANGE,None)
+        Sw = FONT.render("Swaps: "+str(int(Swaps.readline())+0),True,ORANGE,None)
         if len(misRects) == 0:
             break
-        #time.sleep(0.0001)
+        #time.sleep(0.2)
         ev = pygame.event.poll()
         if ev.type == pygame.QUIT:
             break
         main_surf.fill((0, 0, 0))
+        main_surf.blit(Comp,(0,0))
+        main_surf.blit(Sw,(0,30))
         for i in misRects:
             if count == int(idx):
                 main_surf.fill(GREEN, i)
-                count += 1
+                count -= 1
             else:
                 main_surf.fill(WHITE, i)
-                count += 1
+                count -= 1
         pygame.display.flip()
-    miArch.close()
+    time.sleep(5)
+    Sorting.close()
     Indexes.close()
-    AuxIndexes.close()
     
 
 main()
