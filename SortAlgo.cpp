@@ -23,16 +23,20 @@ void BubbleSort(vector<int> &v){
     int swaps = 0;
     ofstream outfile;
     ofstream outfileIndx;
+    ofstream outfileAux;
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
+    outfileAux.open("AuxIndex.txt");
     for(int i = 0; i < v.size(); i++){
         for(int j = 0; j < v.size()-1-i; j++){
+            outfileAux << v.size()-i << endl;
             comparisons++;
             outfile << printSorting(v) << endl; //Writes the vector on the file
             outfileIndx << j+1 << endl; //Writes the index that is beoing looked at
 //            outfile << comparisons << endl; //Wirtes the number of comparisons done
 //            outfile << swaps << endl; //Writes the number of swaps done
             if(v[j] > v[j+1]){
+                outfileAux << v.size()-i << endl;
                 itemSwap(v, j, j+1);
                 swaps++;
                 outfile << printSorting(v) << endl;
@@ -44,6 +48,7 @@ void BubbleSort(vector<int> &v){
     }
     outfile.close();
     outfileIndx.close();
+    outfileAux.close();
 }
 
 void SelectionSort(vector<int> &v){
