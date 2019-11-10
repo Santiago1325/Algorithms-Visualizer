@@ -203,4 +203,8 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
         outfileSwap << swaps << endl;
         count++;
     }
+    outfile.close();
+    outfileIndx.close();
+    outfileSwap.close();
+    outfileComp.close(); 
 }
