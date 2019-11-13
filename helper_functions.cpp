@@ -72,4 +72,56 @@ void generate_even_vector(vector<int> &v, int size, minstd_rand0& rng){
   }
 }
 
+void MaxHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind){
+  int index = id;
+  int left = 2*index + 1;
+  int right = 2*index + 2;
+  int largest = index;
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(left < size && v[largest] < v[left]){
+    largest = left;
+  }
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(right < size && v[largest] < v[right]){
+    largest = right;
+  }
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(largest != id){
+    itemSwap(v, largest, id);
+    outind << -1 << endl;
+    outfile << printSorting(v) << endl;
+    swaps++;
+    outswap << swaps << endl;
+    MaxHeapify(v, size, largest, swaps, comparisons, outfile, outswap, outcomp, outind);
+  }
+}
 
+void MinHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind){
+  int index = id;
+  int left = 2*index + 1;
+  int right = 2*index + 2;
+  int smallest = index;
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(left < size && v[smallest] > v[left]){
+    smallest = left;
+  }
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(right < size && v[smallest] > v[right]){
+    smallest = right;
+  }
+  comparisons++;
+  outcomp << comparisons << endl;
+  if(smallest != id){
+    itemSwap(v, smallest, id);
+    outind << -1 << endl;
+    outfile << printSorting(v) << endl;
+    swaps++;
+    outswap << swaps << endl;
+    MinHeapify(v, size, smallest, swaps, comparisons, outfile, outswap, outcomp, outind);
+  }
+}

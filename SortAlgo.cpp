@@ -173,12 +173,12 @@ void CocktailSort(vector<int> &v){
                 outfileSwap << swaps << endl;
             }
         }
-        lowerLimit++;  
+        lowerLimit++;
     }
     outfile.close();
     outfileIndx.close();
     outfileSwap.close();
-    outfileComp.close(); 
+    outfileComp.close();
 }
 
 void BogoSort(vector<int>& v, minstd_rand0& rng){
@@ -192,7 +192,7 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
-    outfileComp.open("Comparisons.txt");    
+    outfileComp.open("Comparisons.txt");
     while(!isSorted(v)){
         shuffle(v, rng);
         swaps++;
@@ -206,5 +206,65 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
     outfile.close();
     outfileIndx.close();
     outfileSwap.close();
-    outfileComp.close(); 
+    outfileComp.close();
+}
+
+void MaxHeapSort(vector<int> &v){
+  int comparisons = 0;
+  int swaps = 0;
+  int count = 0;
+  ofstream outfile;
+  ofstream outfileIndx;
+  ofstream outfileSwap;
+  ofstream outfileComp;
+  outfile.open("Sorting.txt");
+  outfileIndx.open("Index.txt");
+  outfileSwap.open("Swaps.txt");
+  outfileComp.open("Comparisons.txt");
+  for(int i = v.size()/2-1; i >= 0; i--){
+    outfileIndx  << -1 << endl;
+    MaxHeapify(v, v.size(), i, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+  }
+  for(int j = v.size()-1; j >= 0; j--){
+    itemSwap(v, 0, j);
+    swaps++;
+    outfileSwap << swaps << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << -1 << endl;
+    MaxHeapify(v, j, 0, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+  }
+  outfile.close();
+  outfileIndx.close();
+  outfileSwap.close();
+  outfileComp.close();
+}
+
+void MinHeapSort(vector<int> &v){
+  int comparisons = 0;
+  int swaps = 0;
+  int count = 0;
+  ofstream outfile;
+  ofstream outfileIndx;
+  ofstream outfileSwap;
+  ofstream outfileComp;
+  outfile.open("Sorting.txt");
+  outfileIndx.open("Index.txt");
+  outfileSwap.open("Swaps.txt");
+  outfileComp.open("Comparisons.txt");
+  for(int i = v.size()/2-1; i >= 0; i--){
+    outfileIndx  << -1 << endl;
+    MinHeapify(v, v.size(), i, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+  }
+  for(int j = v.size()-1; j >= 0; j--){
+    itemSwap(v, 0, j);
+    swaps++;
+    outfileSwap << swaps << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << -1 << endl;
+    MinHeapify(v, j, 0, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+  }
+  outfile.close();
+  outfileIndx.close();
+  outfileSwap.close();
+  outfileComp.close();
 }
