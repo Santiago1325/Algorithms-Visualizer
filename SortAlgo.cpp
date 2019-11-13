@@ -251,7 +251,7 @@ void MinHeapSort(vector<int> &v){
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
-  for(int i = v.size()/2-1; i >= 0; i--){
+  for(int i = v.size()/2; i >= 0; i--){
     outfileIndx  << -1 << endl;
     MinHeapify(v, v.size(), i, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
   }
@@ -262,6 +262,13 @@ void MinHeapSort(vector<int> &v){
     outfile << printSorting(v) << endl;
     outfileIndx << -1 << endl;
     MinHeapify(v, j, 0, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+  }
+  for(int k = 0; k < v.size()/2; k++){
+    itemSwap(v, k, v.size()-1-k);
+    swaps++;
+    outfile << printSorting(v) << endl;
+    outfileSwap << swaps << endl;
+    outfileIndx << -1 << endl;
   }
   outfile.close();
   outfileIndx.close();
