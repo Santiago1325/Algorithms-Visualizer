@@ -212,7 +212,7 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
 void MaxHeapSort(vector<int> &v){
   int comparisons = 0;
   int swaps = 0;
-  int count = 0;
+  //int count = 0;
   ofstream outfile;
   ofstream outfileIndx;
   ofstream outfileSwap;
@@ -242,7 +242,7 @@ void MaxHeapSort(vector<int> &v){
 void MinHeapSort(vector<int> &v){
   int comparisons = 0;
   int swaps = 0;
-  int count = 0;
+  //int count = 0;
   ofstream outfile;
   ofstream outfileIndx;
   ofstream outfileSwap;
@@ -269,6 +269,60 @@ void MinHeapSort(vector<int> &v){
     outfile << printSorting(v) << endl;
     outfileSwap << swaps << endl;
     outfileIndx << -1 << endl;
+  }
+  outfile.close();
+  outfileIndx.close();
+  outfileSwap.close();
+  outfileComp.close();
+}
+
+void CountingSort(vector<int> &v){
+  int comparisons = 0;
+  int swaps = 0;
+  int count = 0;
+  int auxIdx = 0;
+  ofstream outfile;
+  ofstream outfileIndx;
+  ofstream outfileSwap;
+  ofstream outfileComp;
+  outfile.open("Sorting.txt");
+  outfileIndx.open("Index.txt");
+  outfileSwap.open("Swaps.txt");
+  outfileComp.open("Comparisons.txt");
+  int max;
+  int min;
+  min = max = v[0];
+  for(int i = 0; i < v.size(); i++){
+    outfile << printSorting(v) << endl;
+    outfileIndx << i << endl;
+    outfileSwap << 0 << endl;
+    outfileComp << -1 << endl;
+    if(v[i] < min)
+      min = v[i];
+    if(v[i] > max)
+      max = v[i];
+  }
+  vector<int> aux(v.size(), 0);
+  for(int j = 0; j < v.size(); j++){
+    outfile << printSorting(v) << endl;
+    outfileIndx << j << endl;
+    outfileSwap << 0 << endl;
+    outfileComp << -1 << endl;
+    aux[v[j]] += 1;
+  }
+  while(count < v.size()){
+    while(aux[auxIdx] != 0){
+      v[count] = auxIdx;
+      count++;
+      aux[auxIdx] -= 1;
+      outfile << printSorting(v) << endl;
+      outfileIndx << count << endl;
+      outfileSwap << 0 << endl;
+      outfileComp << -1 << endl;
+    }
+    auxIdx++;
+    outfileSwap << 0 << endl;
+    outfileComp << -1 << endl;
   }
   outfile.close();
   outfileIndx.close();

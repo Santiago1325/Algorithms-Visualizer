@@ -6,10 +6,12 @@
 void BubbleSort(vector<int> & v);
 void InsertionSort(vector<int> & v);
 void SelectionSort(vector<int> & v);
-void itemSwap(vector<int> &v, int id1, int id2);
 void CocktailSort(vector<int> &v);
 void BogoSort(vector<int>& v, minstd_rand0& rng);
 void MaxHeapSort(vector<int> &v);
 void MinHeapSort(vector<int> &v);
+void CountingSort(vector<int> &v);
+void MergeSort(vector<int> &v); // Falta
+void QuickSort(vector<int> &v);  // Falta
 
 #endif
