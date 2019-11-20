@@ -11,7 +11,7 @@ void BogoSort(vector<int>& v, minstd_rand0& rng);
 void MaxHeapSort(vector<int> &v);
 void MinHeapSort(vector<int> &v);
 void CountingSort(vector<int> &v);
-void MergeSort(vector<int> &v); // Falta
+void MergeSort(vector<int> &v);
 void QuickSort(vector<int> &v);  // Falta
 
 #endif

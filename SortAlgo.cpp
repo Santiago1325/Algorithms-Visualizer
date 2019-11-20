@@ -212,7 +212,6 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
 void MaxHeapSort(vector<int> &v){
   int comparisons = 0;
   int swaps = 0;
-  //int count = 0;
   ofstream outfile;
   ofstream outfileIndx;
   ofstream outfileSwap;
@@ -242,7 +241,6 @@ void MaxHeapSort(vector<int> &v){
 void MinHeapSort(vector<int> &v){
   int comparisons = 0;
   int swaps = 0;
-  //int count = 0;
   ofstream outfile;
   ofstream outfileIndx;
   ofstream outfileSwap;
@@ -328,4 +326,34 @@ void CountingSort(vector<int> &v){
   outfileIndx.close();
   outfileSwap.close();
   outfileComp.close();
+}
+
+void MergeSort(vector<int> &v){
+  int comparisons = 0;
+  int swaps = 0;
+  ofstream outfile;
+  ofstream outfileIndx;
+  ofstream outfileSwap;
+  ofstream outfileComp;
+  outfile.open("Sorting.txt");
+  outfileIndx.open("Index.txt");
+  outfileSwap.open("Swaps.txt");
+  outfileComp.open("Comparisons.txt");
+  if(v.size() <= 1){
+    return;
+  }
+  int mid = v.size()/2;
+  vector<int> left;
+  vector<int> right;
+  for(int i = 0; i < mid; i++){
+    left.push_back(v[i]);
+  }
+  for(int j = 0; j < v.size() - mid; j++){
+    right.push_back(v[mid+j]);
+  }
+
+  MergeSort(left);
+  MergeSort(right);
+  Merge(v, left, right, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
+
 }
