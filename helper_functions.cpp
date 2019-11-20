@@ -125,3 +125,42 @@ void MinHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, 
     MinHeapify(v, size, smallest, swaps, comparisons, outfile, outswap, outcomp, outind);
   }
 }
+
+void Merge(vector<int> &v, vector<int> &left, vector<int> &right, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind){
+  int szLeft = left.size();
+  int szRight = right.size();
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  while(j < szLeft && k < szRight){
+    comparisons++;
+    if(left[j] < right[k]){
+      outfile << printSorting(v) << endl;
+      outswap << -1 << endl;
+      outcomp << comparisons << endl;
+      outind << -1 << endl;
+      j++;
+    }else{
+      v[i] = right[k];
+    }
+    i++;
+  }
+  while(j < szLeft){
+    v[i] = left[j];
+    outfile << printSorting(v) << endl;
+    outswap << -1 << endl;
+    outcomp << comparisons << endl;
+    outind << -1 << endl;
+    j++;
+    i++;
+  }
+  while(k < szRight){
+    v[i] = right[k];
+    outfile << printSorting(v) << endl;
+    outswap << -1 << endl;
+    outcomp << comparisons << endl;
+    outind << -1 << endl;
+    k++;
+    i++;
+  }
+}

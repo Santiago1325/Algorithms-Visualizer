@@ -18,6 +18,7 @@ void generate_norepeat_vector(int size, vector<int>& v, minstd_rand0& rng);
 void generate_even_vector(vector<int> &v, int size, minstd_rand0& rng);
 void MaxHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind);
 void MinHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind);
+void Merge(vector<int> &v, vector<int> &left, vector<int> &right, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind);
 
 
 #endif
