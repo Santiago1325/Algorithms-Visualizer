@@ -10,10 +10,6 @@ int main(int argc, char *argv[]){
 	vector<int> v;
 	unsigned seed = 1325;
     minstd_rand0 rng(seed);
-    cout << argv[1] << endl;
-    cout << argv[2] << endl;
-    cout << argv[3] << endl;
-    cout << argv[4] << endl;
 	if(stoi(argv[2]) == 1){
 		if(stoi(argv[3]) == 1){
 			generate_ordered_vector(v, stoi(argv[4]), rng, false);
