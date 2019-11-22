@@ -300,7 +300,7 @@ void CountingSort(vector<int> &v){
     if(v[i] > max)
       max = v[i];
   }
-  vector<int> aux(v.size(), 0);
+  vector<int> aux(v.size()+1, 0);
   for(int j = 0; j < v.size(); j++){
     outfile << printSorting(v) << endl;
     outfileIndx << j << endl;
