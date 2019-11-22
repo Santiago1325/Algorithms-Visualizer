@@ -48,7 +48,7 @@ def main():
 
     pygame.init()
     main_surf = pygame.display.set_mode((WIDTH, HEIGHT))
-
+    start = time.time()
     while True:
         vec = Sorting.readline()
         idx = Indexes.readline()
@@ -56,6 +56,7 @@ def main():
         misRects = rects(vec)
         Comp = FONT.render("Comparisons: "+str(int(Comparisons.readline())+1),True,ORANGE,None)
         Sw = FONT.render("Swaps: "+str(int(Swaps.readline())+0),True,ORANGE,None)
+        Tm = FONT.render("Time: "+str(round(time.time()-start,2)), True, ORANGE, None)
         if len(misRects) == 0:
             break
         #time.sleep(0.2)
@@ -72,6 +73,7 @@ def main():
                 count -= 1
         main_surf.blit(Comp,(0,0))
         main_surf.blit(Sw,(0,30))
+        main_surf.blit(Tm,(0,60))
         pygame.display.flip()
     Sorting.close()
     Indexes.close()
