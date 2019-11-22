@@ -63,8 +63,6 @@ def main():
         if ev.type == pygame.QUIT:
             break
         main_surf.fill((0, 0, 0))
-        main_surf.blit(Comp,(0,0))
-        main_surf.blit(Sw,(0,30))
         for i in misRects:
             if count == int(idx):
                 main_surf.fill(GREEN, i)
@@ -72,10 +70,14 @@ def main():
             else:
                 main_surf.fill(WHITE, i)
                 count -= 1
+        main_surf.blit(Comp,(0,0))
+        main_surf.blit(Sw,(0,30))
         pygame.display.flip()
-    time.sleep(5)
     Sorting.close()
     Indexes.close()
+    Comparisons.close()
+    Swaps.close()
+    time.sleep(3)
     
 
 main()
