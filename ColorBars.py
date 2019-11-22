@@ -53,7 +53,7 @@ def main():
 
     pygame.init()
     main_surf = pygame.display.set_mode((WIDTH, HEIGHT))
-
+    start = time.time()
     while True:
         vec = Sorting.readline()
         idx = Indexes.readline()
