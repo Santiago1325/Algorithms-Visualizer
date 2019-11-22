@@ -25,7 +25,7 @@ void itemSwap(vector<int> &v, int id1, int id2){
     v[id2] = temp;
 }
 
-void generate_vector(int size, vector<int> &v, minstd_rand0 &rng){
+void generate_vector(vector<int> &v, int size, minstd_rand0 &rng){
   v.clear();
   const int max_num = size;
   rng();
@@ -44,31 +44,24 @@ void shuffle(vector<int>& v, minstd_rand0& rng){
   itemSwap(v, num1, num2);
 }
 
-void generate_norepeat_vector(int size, vector<int>& v, minstd_rand0& rng){
-  v.clear();
-  const int max_num = size;
-  //use set to profit from the count method
-  set<int> numbers;
-  //Generation of a sequence of (pseudo)random numbers
-  rng();
-  int count = 0;
-  while(count < size){
-    int num = int(max_num * ( double(rng()) / rng.max() ));
-    if(numbers.count(num) == 0){ //if number not in set
-      numbers.insert(num);
-      v.push_back(num);
-      count++;
-    }
-  }
-}
-
-
 void generate_even_vector(vector<int> &v, int size, minstd_rand0& rng){
   for(int i = 1; i <= size; i++){
     v.push_back(i);
   }
   for(int k = 0; k < 1000; k++){
     shuffle(v, rng);
+  }
+}
+
+void generate_ordered_even_vector(vector<int> &v, int size, bool inv){
+  if(inv){
+    for(int i = size; i > 0; i--){
+      v.push_back(i);
+    }
+  }else{
+    for(int i = 1; i <= size; i++){
+      v.push_back(i);
+    }
   }
 }
 
@@ -123,6 +116,39 @@ void MinHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, 
     swaps++;
     outswap << swaps << endl;
     MinHeapify(v, size, smallest, swaps, comparisons, outfile, outswap, outcomp, outind);
+  }
+}
+
+void generate_ordered_vector(vector<int>& v,int size, minstd_rand0& rng, bool inv){
+  v.clear();
+  //Generation of an ordered sequence of (pseudo)random numbers
+  rng();
+  if(!inv){
+    int current = 0;
+    for(int i = 0; i < size; ++i){
+      //number between 0 and 1
+      int bin = int(2 * ( double(rng()) / rng.max() ));
+      int num;
+      if(bin == 1){
+  num = i;
+  current = i;
+      }else
+  num = current;
+      v.push_back(num);
+    }
+  }else{
+    int current = size-1;
+    for(int i = size-1; i >= 0; --i){
+      //number between 0 and 1
+      int bin = int(2 * ( double(rng()) / rng.max() ));
+      int num;
+      if(bin == 1){
+  num = i;
+  current = i;
+      }else
+  num = current;
+      v.push_back(num);
+    }
   }
 }
 
