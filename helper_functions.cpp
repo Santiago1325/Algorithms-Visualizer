@@ -19,10 +19,10 @@ string printSorting(vector<int> &v){
 }
 
 void itemSwap(vector<int> &v, int id1, int id2){
-    //Swaps two elements of the vector
-    int temp = v[id1];
-    v[id1] = v[id2];
-    v[id2] = temp;
+  //Swaps two elements of the vector
+  int temp = v[id1];
+  v[id1] = v[id2];
+  v[id2] = temp;
 }
 
 void generate_vector(vector<int> &v, int size, minstd_rand0 &rng){

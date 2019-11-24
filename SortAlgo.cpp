@@ -8,10 +8,21 @@ void BubbleSort(vector<int> &v){
     ofstream outfileIndx;
     ofstream outfileSwap;
     ofstream outfileComp;
+    ofstream outfileInfo;
+    ofstream outfileProcess;
+    outfileProcess.open("Process.txt");
+    outfileInfo.open("Info.txt");
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
     outfileComp.open("Comparisons.txt");
+    outfileInfo << "Bubble Sort " << endl;
+    outfileInfo << "O(N^2)";
+    outfile << printSorting(v) << endl;
+    outfileIndx << 0 << endl;
+    outfileComp << comparisons << endl;
+    outfileSwap << swaps << endl;
+    outfileProcess << " " << endl;
     while(!sorted){
         sorted = true;
         for(int j = 0; j < v.size()-1; j++){
@@ -20,6 +31,7 @@ void BubbleSort(vector<int> &v){
             outfileIndx << j+1 << endl; //Writes the index that is beoing looked at
             outfileComp << comparisons << endl; //Wirtes the number of comparisons done
             outfileSwap << swaps << endl; //Writes the number of swaps done
+            outfileProcess << "¿" << v[j] << " > " << v[j+1] << "?" << endl;
             if(v[j] > v[j+1]){
                 itemSwap(v, j, j+1);
                 swaps++;
@@ -35,6 +47,7 @@ void BubbleSort(vector<int> &v){
     outfileIndx.close();
     outfileSwap.close();
     outfileComp.close();
+    outfileInfo.close(); 
 }
 
 void SelectionSort(vector<int> &v){
@@ -45,10 +58,18 @@ void SelectionSort(vector<int> &v){
     ofstream outfileIndx;
     ofstream outfileSwap;
     ofstream outfileComp;
+    ofstream outfileInfo;
+    outfileInfo.open("Info.txt");
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
     outfileComp.open("Comparisons.txt");
+    outfileInfo << "Selection Sort" << endl;
+    outfileInfo << "O(N^2)" << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << 0 << endl;
+    outfileComp << comparisons << endl;
+    outfileSwap << swaps << endl;
     for(int i = 0; i < v.size(); i++){
         minIndex = i;
         for(int j = i+1; j < v.size(); j++){
@@ -75,6 +96,7 @@ void SelectionSort(vector<int> &v){
     outfileIndx.close();
     outfileSwap.close();
     outfileComp.close();
+    outfileInfo.close(); 
 }
 
 void InsertionSort(vector<int> &v){
@@ -85,10 +107,18 @@ void InsertionSort(vector<int> &v){
     ofstream outfileIndx;
     ofstream outfileSwap;
     ofstream outfileComp;
+    ofstream outfileInfo;
+    outfileInfo.open("Info.txt");
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
     outfileComp.open("Comparisons.txt");
+    outfileInfo << "Insertion Sort" << endl;
+    outfileInfo << "O(N^2)" << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << 0 << endl;
+    outfileComp << comparisons << endl;
+    outfileSwap << swaps << endl;
     for(int i = 1; i < v.size(); i++){
         outfile << printSorting(v) << endl;
         outfileIndx << i << endl;
@@ -120,6 +150,7 @@ void InsertionSort(vector<int> &v){
     outfileIndx.close();
     outfileSwap.close();
     outfileComp.close();
+    outfileInfo.close(); 
 }
 
 void CocktailSort(vector<int> &v){
@@ -132,10 +163,18 @@ void CocktailSort(vector<int> &v){
     ofstream outfileIndx;
     ofstream outfileSwap;
     ofstream outfileComp;
+    ofstream outfileInfo;
+    outfileInfo.open("Info.txt");
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
     outfileComp.open("Comparisons.txt");
+    outfileInfo << "Cocktail Sort" << endl;
+    outfileInfo << "O(N^2)" << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << 0 << endl;
+    outfileComp << comparisons << endl;
+    outfileSwap << swaps << endl;
     while(swaped){
         swaped = false;
         for(int j = lowerLimit; j < upperLimit; j++){
@@ -182,6 +221,7 @@ void CocktailSort(vector<int> &v){
     outfileIndx.close();
     outfileSwap.close();
     outfileComp.close();
+    outfileInfo.close(); 
 }
 
 void BogoSort(vector<int>& v, minstd_rand0& rng){
@@ -191,10 +231,18 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
     ofstream outfileIndx;
     ofstream outfileSwap;
     ofstream outfileComp;
+    ofstream outfileInfo;
+    outfileInfo.open("Info.txt");
     outfile.open("Sorting.txt");
     outfileIndx.open("Index.txt");
     outfileSwap.open("Swaps.txt");
     outfileComp.open("Comparisons.txt");
+    outfileInfo << "Bogo Sort" << endl;
+    outfileInfo << "O(N*N!)" << endl;
+    outfile << printSorting(v) << endl;
+    outfileIndx << 0 << endl;
+    outfileComp << comparisons << endl;
+    outfileSwap << swaps << endl;
     while(!isSorted(v)){
         shuffle(v, rng);
         swaps++;
@@ -207,6 +255,7 @@ void BogoSort(vector<int>& v, minstd_rand0& rng){
     outfileIndx.close();
     outfileSwap.close();
     outfileComp.close();
+    outfileInfo.close(); 
 }
 
 void MaxHeapSort(vector<int> &v){
@@ -216,10 +265,18 @@ void MaxHeapSort(vector<int> &v){
   ofstream outfileIndx;
   ofstream outfileSwap;
   ofstream outfileComp;
+  ofstream outfileInfo;
+  outfileInfo.open("Info.txt");
   outfile.open("Sorting.txt");
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
+  outfileInfo << "Max Heap Sort" << endl;
+  outfileInfo << "O(N*logN)" << endl;
+  outfile << printSorting(v) << endl;
+  outfileIndx << 0 << endl;
+  outfileComp << comparisons << endl;
+  outfileSwap << swaps << endl;
   for(int i = v.size()/2-1; i >= 0; i--){
     outfileIndx  << -1 << endl;
     MaxHeapify(v, v.size(), i, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
@@ -236,6 +293,7 @@ void MaxHeapSort(vector<int> &v){
   outfileIndx.close();
   outfileSwap.close();
   outfileComp.close();
+  outfileInfo.close(); 
 }
 
 void MinHeapSort(vector<int> &v){
@@ -245,10 +303,18 @@ void MinHeapSort(vector<int> &v){
   ofstream outfileIndx;
   ofstream outfileSwap;
   ofstream outfileComp;
+  ofstream outfileInfo;
+  outfileInfo.open("Info.txt");
   outfile.open("Sorting.txt");
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
+  outfileInfo << "Min Heap Sort" << endl;
+  outfileInfo << "O(N*logN)" << endl;
+  outfile << printSorting(v) << endl;
+  outfileIndx << 0 << endl;
+  outfileComp << comparisons << endl;
+  outfileSwap << swaps << endl;
   for(int i = v.size()/2; i >= 0; i--){
     outfileIndx  << -1 << endl;
     MinHeapify(v, v.size(), i, swaps, comparisons, outfile, outfileSwap, outfileComp, outfileIndx);
@@ -272,6 +338,7 @@ void MinHeapSort(vector<int> &v){
   outfileIndx.close();
   outfileSwap.close();
   outfileComp.close();
+  outfileInfo.close(); 
 }
 
 void CountingSort(vector<int> &v){
@@ -283,10 +350,18 @@ void CountingSort(vector<int> &v){
   ofstream outfileIndx;
   ofstream outfileSwap;
   ofstream outfileComp;
+  ofstream outfileInfo;
+  outfileInfo.open("Info.txt");
   outfile.open("Sorting.txt");
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
+  outfileInfo << "Counting Sort" << endl;
+  outfileInfo << "O(N+K)" << endl;
+  outfile << printSorting(v) << endl;
+  outfileIndx << 0 << endl;
+  outfileComp << comparisons << endl;
+  outfileSwap << swaps << endl;
   int max;
   int min;
   min = max = v[0];
@@ -326,6 +401,7 @@ void CountingSort(vector<int> &v){
   outfileIndx.close();
   outfileSwap.close();
   outfileComp.close();
+  outfileInfo.close(); 
 }
 
 void OddEvenSort(vector<int> &v){
@@ -336,13 +412,17 @@ void OddEvenSort(vector<int> &v){
   ofstream outfileIndx;
   ofstream outfileSwap;
   ofstream outfileComp;
+  ofstream outfileInfo;
+  outfileInfo.open("Info.txt");
   outfile.open("Sorting.txt");
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
+  outfileInfo << "Odd Even Sort" << endl;
+  outfileInfo << "O(N^2)" << endl;
   outfile << printSorting(v) << endl;
-  outfileComp << comparisons << endl;
   outfileIndx << 0 << endl;
+  outfileComp << comparisons << endl;
   outfileSwap << swaps << endl;
   while(!sorted){
     sorted = true;
@@ -382,7 +462,8 @@ void OddEvenSort(vector<int> &v){
   outfile.close();
   outfileIndx.close();
   outfileSwap.close();
-  outfileComp.close();  
+  outfileComp.close();
+  outfileInfo.close();     
 }
 
 
@@ -394,13 +475,21 @@ void GnomeSort(vector<int> &v){
   ofstream outfileIndx;
   ofstream outfileSwap;
   ofstream outfileComp;
+  ofstream outfileInfo;
+  outfileInfo.open("Info.txt");
   outfile.open("Sorting.txt");
   outfileIndx.open("Index.txt");
   outfileSwap.open("Swaps.txt");
   outfileComp.open("Comparisons.txt");
+  outfileInfo << "Gnome Sort" << endl;
+  outfileInfo << "O(N^2)" << endl;
   outfile << printSorting(v) << endl;
   outfileComp << comparisons << endl;
   outfileIndx << index-1 << endl;
+  outfileSwap << swaps << endl;
+  outfile << printSorting(v) << endl;
+  outfileIndx << 0 << endl;
+  outfileComp << comparisons << endl;
   outfileSwap << swaps << endl;
   while(index < v.size()){ 
     if(index == 0){
@@ -430,6 +519,7 @@ void GnomeSort(vector<int> &v){
   outfile.close();
   outfileIndx.close();
   outfileSwap.close();
-  outfileComp.close(); 
+  outfileComp.close();
+  outfileInfo.close(); 
 }
 
