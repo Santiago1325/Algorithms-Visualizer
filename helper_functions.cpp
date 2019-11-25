@@ -1,6 +1,7 @@
 #include "helper_functions.hpp"
 
 bool isSorted(vector<int> &v){
+    //Verifica si un vector esta organizado
     for(int i = 0; i < v.size()-1; i++){
         if(v[i] > v[i+1]){
             return false;
@@ -10,7 +11,7 @@ bool isSorted(vector<int> &v){
 }
 
 string printSorting(vector<int> &v){
-  //Returns a string with the elements of the vector
+  //Retorna un string con los elementos del vector
   string sort = "";
   for(int i = 0; i < v.size(); i++){
     sort = sort + to_string(v[i]) + " ";
@@ -19,13 +20,14 @@ string printSorting(vector<int> &v){
 }
 
 void itemSwap(vector<int> &v, int id1, int id2){
-  //Swaps two elements of the vector
+  //Intercambia dos elementos del vector
   int temp = v[id1];
   v[id1] = v[id2];
   v[id2] = temp;
 }
 
 void generate_vector(vector<int> &v, int size, minstd_rand0 &rng){
+  //Genera un vector con el tamaño dado y numeros aleatorios
   v.clear();
   const int max_num = size;
   rng();
@@ -36,24 +38,27 @@ void generate_vector(vector<int> &v, int size, minstd_rand0 &rng){
 }
 
 void shuffle(vector<int>& v, minstd_rand0& rng){
-  //two random numbers
+  //Dos indices aleatorios
   int num1 = int(v.size() * ( double(rng()) / rng.max() ));
   int num2 = int(v.size() * ( double(rng()) / rng.max() ));
 
-  //swap the elements
+  //Intercambia los indices
   itemSwap(v, num1, num2);
 }
 
 void generate_even_vector(vector<int> &v, int size, minstd_rand0& rng){
+  //Genera un vector con una secuencia de numeros desde 1 hasta el tamaño dado
   for(int i = 1; i <= size; i++){
     v.push_back(i);
   }
+  //Intercambia aleatoriamente los elementos del vector
   for(int k = 0; k < 1000; k++){
     shuffle(v, rng);
   }
 }
 
 void generate_ordered_even_vector(vector<int> &v, int size, bool inv){
+  //Genera un vector con elementos aleatorios y sin repeticion pero ordenados o invertidos
   if(inv){
     for(int i = size; i > 0; i--){
       v.push_back(i);
@@ -120,8 +125,8 @@ void MinHeapify(vector<int> &v, int size, int id, int &swaps, int &comparisons, 
 }
 
 void generate_ordered_vector(vector<int>& v,int size, minstd_rand0& rng, bool inv){
+  //Genera una secuencia de numeros aleatorios, pero ordenados o invertidos
   v.clear();
-  //Generation of an ordered sequence of (pseudo)random numbers
   rng();
   if(!inv){
     int current = 0;
@@ -152,41 +157,3 @@ void generate_ordered_vector(vector<int>& v,int size, minstd_rand0& rng, bool in
   }
 }
 
-void Merge(vector<int> &v, vector<int> &left, vector<int> &right, int &comparisons, ofstream &outfile, ofstream &outswap, ofstream &outcomp, ofstream &outind){
-  int szLeft = left.size();
-  int szRight = right.size();
-  int i = 0;
-  int j = 0;
-  int k = 0;
-  while(j < szLeft && k < szRight){
-    comparisons++;
-    if(left[j] < right[k]){
-      outfile << printSorting(v) << endl;
-      outswap << -1 << endl;
-      outcomp << comparisons << endl;
-      outind << -1 << endl;
-      j++;
-    }else{
-      v[i] = right[k];
-    }
-    i++;
-  }
-  while(j < szLeft){
-    v[i] = left[j];
-    outfile << printSorting(v) << endl;
-    outswap << -1 << endl;
-    outcomp << comparisons << endl;
-    outind << -1 << endl;
-    j++;
-    i++;
-  }
-  while(k < szRight){
-    v[i] = right[k];
-    outfile << printSorting(v) << endl;
-    outswap << -1 << endl;
-    outcomp << comparisons << endl;
-    outind << -1 << endl;
-    k++;
-    i++;
-  }
-}

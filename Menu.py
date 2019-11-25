@@ -1,5 +1,5 @@
 """
-Retorna 2 listas con las números correspondientes a las elecciones
+Llama a un ejecutable de C++ con unos argumentos dados
 """
 
 import pygame
@@ -17,6 +17,7 @@ pygame.font.init()
 FONT = pygame.font.Font(None, 40)
 
 def clearFiles():
+    #Vacia los archivos
     Info = open("Info.txt", 'w').close
     Sorting = open('Sorting.txt', 'w').close
     Indexes = open('Index.txt', 'w').close
@@ -25,6 +26,7 @@ def clearFiles():
 
 
 def botones(opcions):
+    #Creacion de los botones
     rectas = []
     y = 10
     for i in opcions:
@@ -33,6 +35,7 @@ def botones(opcions):
     return rectas
 
 def menuAlgOpcions():
+    #Menu de seleccion de los algoritmos de orden
     algOpcions = ["BubbleSort", "InsertionSort", "SelectionSort", "CocktailSort", "BogoSort", "MaxHeapSort", "MinHeapSort", "CountingSort", "OddEvenSort", "GnomeSort"]   #lista de los algoritmos
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -57,6 +60,7 @@ def menuAlgOpcions():
         pygame.display.update()
 
 def menuNumElements():
+    #Menu de la cantida de elementos en la estructura
     numElements = ["10", "25", "50", "100", "125", "150", "200", "250", "300", "400", "500"]    #Número elementos el el vector
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -82,6 +86,7 @@ def menuNumElements():
         pygame.display.update()
 
 def menuEstruct():
+    #Menu de como se deben generar los elementos
     estrucType = ["Con Repetición", "Sin repetición"]
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -107,6 +112,7 @@ def menuEstruct():
         pygame.display.update()
 
 def menuOrgVec():
+    #Menu de el orden de los elementos
     orgVec = ["Ordenado", "Random", "Invertido"]
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -131,6 +137,7 @@ def menuOrgVec():
         pygame.display.update()
 
 def menuVisualizerType():
+    #Menu de tipo de representacion grafica
     visTypes = ["Piramide", "Barras"]
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -155,6 +162,7 @@ def menuVisualizerType():
         pygame.display.update()
 
 def menuVelocidad():
+    #Menu de velocidad de la animacion
     velocidad = ["Rapido", "Medio", "Lento"]
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
@@ -180,24 +188,28 @@ def menuVelocidad():
         pygame.display.update()
 
 def displayMenus():
+    #Guardar las configuraciones seleccionadas por el usuario
     menus = [menuAlgOpcions(), menuEstruct(), menuOrgVec(), menuNumElements()]
     menus1 = [menuVelocidad(), menuVisualizerType()]
     return menus, menus1
 
 
 def main():
+    #Funcion principal
+    #Armar los argumentos para el ejecutable de C++
 	Arg, vis = displayMenus()
 	m = ["./main"]
 	for i in Arg:
     		m.append(str(i))
-	print(m)
-	print(vis)
+    #Llamar al archivo de C++ con los argumentos dados
 	proc = subprocess.Popen(m)
 	time.sleep(4)
+    #Escoger la visualizacion seleccionada por el usuario
 	if vis[1] == "Barras":
     		interGraph.main(vis[0])
 	elif vis[1] == "Piramide":
     		ColorBars.main(vis[0])
+    #Una vez termine la visualizacion, limpiar archivos y volver al menu
 	clearFiles()
 	main()
 

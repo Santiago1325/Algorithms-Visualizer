@@ -2,11 +2,13 @@ import pygame
 import time
 
 def numElements():
+    #Encuentra la cantidad de elementos
     file = open('Sorting.txt')
     line = file.readline()
     nums = line.split()
     return len(nums)
 
+#Variables importantes
 WHITE = (255,255,255)
 GREEN = (0,255,0)
 ORANGE = (255,127,80)
@@ -18,7 +20,8 @@ FONT = pygame.font.Font(None, 40)
 
 
 
-def rects(line):    #recibe una linea de un .txt
+def rects(line):    
+    #Recibe una linea de un archivo de texto y genera las rectas junto a su color
     listRects = []
     PosX = WIDTH//2
     nums = line.split()
@@ -44,6 +47,7 @@ def rects(line):    #recibe una linea de un .txt
 
 """Main"""
 def main(speed):
+    #Apertura de archivos para leer
     Info = open("Info.txt", 'r')
     Sorting = open('Sorting.txt', 'r')
     Indexes = open('Index.txt', 'r')
@@ -54,7 +58,8 @@ def main(speed):
     Complexity = Info.readline()
     Complexity = Complexity[0:len(Complexity)-1]
     vec = Sorting.readline()
-    misRects = rects(vec)  
+    misRects = rects(vec)
+    #Velocidad de la animacion  
     if speed == "Lento":
         speed = 0.5
     elif speed == "Medio":
@@ -64,11 +69,14 @@ def main(speed):
     pygame.init()
     main_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     start = time.time()
+    #Inicio de la animacion
     while True:
+        #Lectura de las lineas de los archivos
         vec = Sorting.readline()
         idx = Indexes.readline()
         count = numElements()-1
         misRects = rects(vec)
+        #Creacion de texto
         Comp = FONT.render("Comparisons: "+str(int(Comparisons.readline())+1),True,ORANGE,None)
         Sw = FONT.render("Swaps: "+str(int(Swaps.readline())+0),True,ORANGE,None)
         Tm = FONT.render("Time: "+str(round(time.time()-start-speed,2)), True, ORANGE, None)
@@ -82,6 +90,7 @@ def main(speed):
         if ev.type == pygame.QUIT:
             break
         main_surf.fill((0, 0, 0))
+        #Dibujar rectas
         for i in misRects:
             if count == int(idx):
                 main_surf.fill(GREEN, i[0])
@@ -89,6 +98,7 @@ def main(speed):
             else:
                 main_surf.fill(i[1],i[0])
                 count -= 1
+        #Dibujar texto
         main_surf.blit(T,(0,0))
         main_surf.blit(C,(0,30))
         main_surf.blit(Comp,(0,60))
