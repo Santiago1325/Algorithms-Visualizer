@@ -12,7 +12,7 @@ GREEN = (0,255,0)
 ORANGE = (255,127,80)
 WIDTH = 1000
 HEIGHT = 500
-HEIGHTRECT = HEIGHT//numElements()
+
 pygame.font.init()
 FONT = pygame.font.Font(None, 40)
 
@@ -21,11 +21,12 @@ FONT = pygame.font.Font(None, 40)
 def rects(line):    #recibe una linea de un .txt
     listRects = []
     PosX = WIDTH//2
-    PosY = 0
     nums = line.split()
     max = numElements()
+    HEIGHTRECT = HEIGHT//numElements()
+    PosY = HEIGHT
 
-    for i in (nums):
+    for i in reversed(nums):
         WIDTHRECT = int(i)*(WIDTH//max)
         rect = (PosX-WIDTHRECT//2, PosY, WIDTHRECT, HEIGHTRECT)
         if int(i) <= max//3:
@@ -35,7 +36,7 @@ def rects(line):    #recibe una linea de un .txt
         elif int(i) > 2*max//3 and int(i) <= 3*max//3:
             color = (155,0,int(i)%255)
         listRects.append((rect,color))
-        PosY += HEIGHTRECT
+        PosY -= HEIGHTRECT
 
 
     return listRects
@@ -66,7 +67,7 @@ def main(speed):
     while True:
         vec = Sorting.readline()
         idx = Indexes.readline()
-        count = 0
+        count = numElements()-1
         misRects = rects(vec)
         Comp = FONT.render("Comparisons: "+str(int(Comparisons.readline())+1),True,ORANGE,None)
         Sw = FONT.render("Swaps: "+str(int(Swaps.readline())+0),True,ORANGE,None)
@@ -84,10 +85,10 @@ def main(speed):
         for i in misRects:
             if count == int(idx):
                 main_surf.fill(GREEN, i[0])
-                count += 1
+                count -= 1
             else:
                 main_surf.fill(i[1],i[0])
-                count += 1
+                count -= 1
         main_surf.blit(T,(0,0))
         main_surf.blit(C,(0,30))
         main_surf.blit(Comp,(0,60))

@@ -12,7 +12,6 @@ GREEN = (0,255,0)
 ORANGE = (255,127,80)
 WIDTH = 1000
 HEIGHT = 500
-WIDTHRECT = WIDTH//numElements()
 pygame.font.init()
 FONT = pygame.font.Font(None, 40)
 
@@ -20,6 +19,7 @@ FONT = pygame.font.Font(None, 40)
 
 def rects(line):    #recibe una linea de un .txt
     listRects = []
+    WIDTHRECT = WIDTH//numElements()
     PosX = WIDTH-WIDTHRECT
     PosY = HEIGHT
     nums = line.split()

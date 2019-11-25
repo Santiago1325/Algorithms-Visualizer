@@ -16,6 +16,14 @@ HEIGHT = 500
 pygame.font.init()
 FONT = pygame.font.Font(None, 40)
 
+def clearFiles():
+    Info = open("Info.txt", 'w').close
+    Sorting = open('Sorting.txt', 'w').close
+    Indexes = open('Index.txt', 'w').close
+    Comparisons = open('Comparisons.txt','w').close
+    Swaps = open('Swaps.txt','w').close
+
+
 def botones(opcions):
     rectas = []
     y = 10
@@ -49,7 +57,7 @@ def menuAlgOpcions():
         pygame.display.update()
 
 def menuNumElements():
-    numElements = ["10", "15", "25", "50", "100", "150", "200", "250", "300", "400", "500"]    #Número elementos el el vector
+    numElements = ["10", "25", "50", "100", "125", "150", "200", "250", "300", "400", "500"]    #Número elementos el el vector
     menu_surf = pygame.display.set_mode((WIDTH, HEIGHT))
     while True:
         menu_surf.fill((0, 0, 0))
@@ -176,16 +184,21 @@ def displayMenus():
     menus1 = [menuVelocidad(), menuVisualizerType()]
     return menus, menus1
 
-Arg, vis = displayMenus()
-m = ["./main"]
-for i in Arg:
-    m.append(str(i))
-print(m)
-print(vis)
-proc = subprocess.Popen(m, shell = True)
-time.sleep(0.2)
-if vis[1] == "Barras":
-    interGraph.main(vis[0])
-elif vis[1] == "Piramide":
-    ColorBars.main(vis[0])
 
+def main():
+	Arg, vis = displayMenus()
+	m = ["./main"]
+	for i in Arg:
+    		m.append(str(i))
+	print(m)
+	print(vis)
+	proc = subprocess.Popen(m)
+	time.sleep(4)
+	if vis[1] == "Barras":
+    		interGraph.main(vis[0])
+	elif vis[1] == "Piramide":
+    		ColorBars.main(vis[0])
+	clearFiles()
+	main()
+
+main()
