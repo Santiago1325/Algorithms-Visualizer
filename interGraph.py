@@ -55,9 +55,9 @@ def main(speed):
     misRects = rects(vec)
     #Definicion de la velocidad de la animacion
     if speed == "Lento":
-        speed = 0.5
+        speed = 0.3
     elif speed == "Medio":
-        speed = 0.2
+        speed = 0.05
     elif speed == "Rapido":
         speed = 0
     pygame.init()
